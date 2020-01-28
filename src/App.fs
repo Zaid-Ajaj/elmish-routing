@@ -6,13 +6,13 @@ open Feliz
 open Feliz.Router
 
 type State =
-    { CurrentUrl: string list }
+  { CurrentUrl: string list }
 
 type Msg =
-    | UrlChanged of string list
+  | UrlChanged of string list
 
 let init() =
-    { CurrentUrl = [ ] }
+  { CurrentUrl = Router.currentUrl() }
 
 let update (msg: Msg) (state: State): State =
   match msg with
@@ -29,9 +29,7 @@ let render (state: State) (dispatch: Msg -> unit) =
 
   Router.router [
     Router.onUrlChanged (UrlChanged >> dispatch)
-    Router.application [
-      activePage
-    ]
+    Router.application [ activePage ]
   ]
 
 Program.mkSimple init update render
