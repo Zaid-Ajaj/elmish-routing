@@ -27,9 +27,9 @@ let render (state: State) (dispatch: Msg -> unit) =
     | [ "contact" ] -> Html.h1 "Contact"
     | _ -> Html.h1 "Not Found"
 
-  Router.router [
-    Router.onUrlChanged (UrlChanged >> dispatch)
-    Router.application [ activePage ]
+  React.router [
+    router.onUrlChanged (UrlChanged >> dispatch)
+    router.children [ activePage ]
   ]
 
 Program.mkSimple init update render
